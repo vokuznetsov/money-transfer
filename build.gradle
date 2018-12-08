@@ -11,6 +11,9 @@ buildscript {
         lombokVersion = '1.18.4'
         swaggerVersion = '1.5.21'
         swaggerUiVersion = '3.20.1'
+
+        junitVersion = '4.12'
+        testJaksonVersion = '2.3.0'
     }
 }
 
@@ -44,10 +47,10 @@ dependencies {
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
 
-    testCompile("junit:junit:4.12")
+    testCompile("junit:junit:${junitVersion}")
     testCompile("com.sun.jersey:jersey-client:${jerseyVersion}")
     testCompile("com.sun.jersey:jersey-grizzly2:${jerseyVersion}")
-    testCompile("com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.3.0")
+    testCompile("com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:${testJaksonVersion}")
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
 
 }
