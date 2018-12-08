@@ -39,7 +39,7 @@ public final class ITransferServiceImpl implements ITransferService {
                 Account to = accountService.getAccounts(destId);
                 from.setBalance(from.getBalance() - amount);
                 to.setBalance(to.getBalance() + amount);
-                log.info("Money in the amount {} successfully transfer from account {} to {}", amount, from.getId(),
+                log.info("Money in the amount {} transfer successfully from account {} to {}", amount, from.getId(),
                         to.getId());
             }
         }
