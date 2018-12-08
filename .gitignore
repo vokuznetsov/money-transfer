@@ -1,0 +1,9 @@
+# Idea files
+.idea/
+*.iml
+*out/
+*build/
+target/
+
+.gradle/
+*.sql

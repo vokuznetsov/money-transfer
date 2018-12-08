@@ -1,0 +1,65 @@
+buildscript {
+    ext {
+        group 'com.revolut'
+        version '1.0'
+
+        guiceVersion = '4.2.2'
+        jerseyVersion = '1.19.4'
+        jettyVersion = '9.4.14.v20181114'
+        configVersion = '1.2.1'
+        slf4jVersion = '1.7.5'
+        lombokVersion = '1.18.4'
+        swaggerVersion = '1.5.21'
+        swaggerUiVersion = '3.20.1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("com.google.inject:guice:${guiceVersion}")
+    compile("com.google.inject.extensions:guice-servlet:${guiceVersion}")
+    compile("com.sun.jersey:jersey-client:${jerseyVersion}")
+    compile("com.sun.jersey.contribs:jersey-guice:${jerseyVersion}") {
+        exclude group: "com.google.inject", module: "guice"
+        exclude group: "com.google.inject.extensions", module: "guice-servlet"
+    }
+    compile("com.sun.jersey:jersey-json:${jerseyVersion}")
+    compile("org.eclipse.jetty:jetty-server:${jettyVersion}")
+    compile("org.eclipse.jetty:jetty-servlet:${jettyVersion}")
+    compile("com.typesafe:config:${configVersion}")
+    compile("io.swagger:swagger-jersey-jaxrs:${swaggerVersion}")
+    compile("org.webjars:swagger-ui:${swaggerUiVersion}")
+    compile("org.slf4j:slf4j-log4j12:${slf4jVersion}")
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+    testCompile("junit:junit:4.12")
+    testCompile("com.sun.jersey:jersey-client:${jerseyVersion}")
+    testCompile("com.sun.jersey:jersey-grizzly2:${jerseyVersion}")
+    testCompile("com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.3.0")
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+}
+
+jar {
+    doFirst {
+        manifest {
+            if (!configurations.compile.isEmpty()) {
+                attributes(
+                        'Class-Path': configurations.compile.collect { it.toURI().toString() }.join(' '),
+                        'Main-Class': 'com.revolut.Application')
+            }
+        }
+    }
+}
