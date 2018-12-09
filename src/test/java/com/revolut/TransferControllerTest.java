@@ -124,7 +124,7 @@ public class TransferControllerTest extends AbstractControllerTest {
 
     /**
      * This test simulates multithreading environment and check when all runnable tasks have completed successfully
-     * before and after total balances are equal.
+     * before and after total balances should be equal.
      *
      * Max test completion time is 1 minute.
      * After this time test completes successful but write a warning message in log.
